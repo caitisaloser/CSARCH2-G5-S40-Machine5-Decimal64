@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Decimal64Converter from "./components/Decimal64Converter";
 import RoundingSimulator from "./components/RoundingSimulator";
 import SubtractionSimulator from "./components/SubtractionSimulator";
+import DivisionSimulator from "./components/DivisionSimulator";
 import "./styles/global.css";
 
 function App() {
@@ -90,6 +91,19 @@ function App() {
                     </button>
 
                     <button
+                        className={
+                            module === "division"
+                                ? "active"
+                                : ""
+                        }
+                        onClick={() =>
+                            setModule("division")
+                        }
+                    >
+                        Division
+                    </button>
+
+                    <button
                         className="theme-toggle"
                         type="button"
                         aria-label={`Switch to ${
@@ -130,6 +144,10 @@ function App() {
 
             {module === "subtraction" && (
                 <SubtractionSimulator />
+            )}
+
+            {module === "division" && (
+                <DivisionSimulator />
             )}
         </>
     );

@@ -344,3 +344,44 @@ export function roundCoefficient(
         decision
     };
 }
+
+export function divideCoefficients(dividendCoef, divisorCoef, targetPrecision = 16) {
+    let dividend = BigInt(dividendCoef);
+    const divisor = BigInt(divisorCoef);
+
+    if (divisor === 0n) {
+        throw new Error("Division by zero should be caught by special cases check.");
+    }
+
+    const neededDigits = targetPrecision + 2; 
+    
+    const dividendStr = dividend.toString();
+    const divisorStr = divisor.toString();
+    
+    const scaleFactor = Math.max(0, neededDigits - (dividendStr.length - divisorStr.length));
+    
+    dividend = dividend * (10n ** BigInt(scaleFactor));
+
+    const quotient = dividend / divisor;
+    const remainder = dividend % divisor;
+
+    let quotientStr = quotient.toString();
+
+    let retainedCoefficient = quotientStr;
+    let discardedDigits = "";
+
+    if (quotientStr.length > targetPrecision) {
+        retainedCoefficient = quotientStr.slice(0, targetPrecision);
+        discardedDigits = quotientStr.slice(targetPrecision);
+    }
+
+    if (remainder !== 0n) {
+        discardedDigits += "1";
+    }
+
+    return {
+        quotient: retainedCoefficient,
+        discarded: discardedDigits,
+        scaleAdjustment: scaleFactor
+    };
+}
