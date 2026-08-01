@@ -106,70 +106,63 @@ export function checkSubtractionSpecialCases(
 export function checkDivisionSpecialCases(dividend, divisor) {
     const resultSign = (dividend.sign === divisor.sign) ? 0 : 1; 
 
-    if (dividend.type === 'NaN' || divisor.type === 'NaN') {
-        return {
-            isSpecial: true,
-            resultType: 'NaN',
-            sign: 0,
-            reason: "Any operation involving NaN results in NaN."
+    if (dividend.kind === 'nan' || divisor.kind === 'nan') {
+        return { 
+            isSpecial: true, 
+            resultType: 'NaN', 
+            sign: 0, 
+            explanation: "Any operation involving NaN results in NaN." 
         };
     }
 
-    if (dividend.type === 'Zero' && divisor.type === 'Zero') {
-        return {
-            isSpecial: true,
-            resultType: 'NaN',
-            sign: 0,
-            reason: "Zero divided by zero is undefined, resulting in NaN."
+    if (dividend.kind === 'zero' && divisor.kind === 'zero') {
+        return { 
+            isSpecial: true, 
+            resultType: 'NaN', 
+            sign: 0, 
+            explanation: "Zero divided by zero is undefined, resulting in NaN." 
+        };
+    }
+    if ((dividend.kind === 'finite' || dividend.kind === 'subnormal') && divisor.kind === 'zero') {
+        return { 
+            isSpecial: true, 
+            resultType: 'Infinity', 
+            sign: resultSign, 
+            explanation: "A finite nonzero value divided by zero results in Infinity." 
+        };
+    }
+    if (dividend.kind === 'zero' && (divisor.kind === 'finite' || divisor.kind === 'subnormal')) {
+        return { 
+            isSpecial: true, 
+            resultType: 'Zero', 
+            sign: resultSign, 
+            explanation: "Zero divided by a finite nonzero value results in zero." 
+        };
+    }
+    if (dividend.kind === 'infinity' && divisor.kind === 'infinity') {
+        return { 
+            isSpecial: true, 
+            resultType: 'NaN', 
+            sign: 0, 
+            explanation: "Infinity divided by Infinity is undefined, resulting in NaN." 
+        };
+    }
+    if (dividend.kind === 'infinity' && (divisor.kind === 'finite' || divisor.kind === 'subnormal' || divisor.kind === 'zero')) {
+        return { 
+            isSpecial: true, 
+            resultType: 'Infinity', 
+            sign: resultSign, 
+            explanation: "Infinity divided by a finite value results in Infinity." 
+        };
+    }
+    if ((dividend.kind === 'finite' || dividend.kind === 'subnormal' || dividend.kind === 'zero') && divisor.kind === 'infinity') {
+        return { 
+            isSpecial: true, 
+            resultType: 'Zero', 
+            sign: resultSign, 
+            explanation: "A finite value divided by Infinity results in zero." 
         };
     }
 
-    if (dividend.type === 'Normal' && divisor.type === 'Zero') {
-        return {
-            isSpecial: true,
-            resultType: 'Infinity',
-            sign: resultSign,
-            reason: "A finite nonzero value divided by zero results in Infinity."
-        };
-    }
-
-    if (dividend.type === 'Zero' && divisor.type === 'Normal') {
-        return {
-            isSpecial: true,
-            resultType: 'Zero',
-            sign: resultSign,
-            reason: "Zero divided by a finite nonzero value results in zero."
-        };
-    }
-
-    if (dividend.type === 'Infinity' && divisor.type === 'Infinity') {
-        return {
-            isSpecial: true,
-            resultType: 'NaN',
-            sign: 0,
-            reason: "Infinity divided by Infinity is undefined, resulting in NaN."
-        };
-    }
-
-    if (dividend.type === 'Infinity' && divisor.type === 'Normal') {
-        return {
-            isSpecial: true,
-            resultType: 'Infinity',
-            sign: resultSign,
-            reason: "Infinity divided by a finite value results in Infinity."
-        };
-    }
-
-    if (dividend.type === 'Normal' && divisor.type === 'Infinity') {
-        return {
-            isSpecial: true,
-            resultType: 'Zero',
-            sign: resultSign,
-            reason: "A finite value divided by Infinity results in zero."
-        };
-    }
-
-    return {
-        isSpecial: false
-    };
+    return { isSpecial: false };
 }

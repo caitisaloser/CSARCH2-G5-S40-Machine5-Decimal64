@@ -29,9 +29,14 @@ export function simulateDivision(dividendInput, dividendFormat, divisorInput, di
     if (specialCheck.isSpecial) {
         steps.push(`Special Case Detected: ${specialCheck.explanation}`);
         
-        const specialString = specialCheck.resultType === 'NaN' 
-            ? "NaN" 
-            : (specialCheck.sign === 1 ? "-Infinity" : "Infinity");
+        let specialString;
+        if (specialCheck.resultType === 'NaN') {
+            specialString = "NaN";
+        } else if (specialCheck.resultType === 'Zero') {
+            specialString = specialCheck.sign === 1 ? "-0" : "0";
+        } else {
+            specialString = specialCheck.sign === 1 ? "-Infinity" : "Infinity";
+        }
             
         const finalEncoded = encodeDecimal64(specialString);
         
@@ -75,7 +80,7 @@ export function simulateDivision(dividendInput, dividendFormat, divisorInput, di
     else if (roundingMode === "round-up") {
         if (resultSign === 0 && isNonZeroDiscard) {
             increment = true;
-            roundingExplanation = "Positive value with non-zero discarded digits; rounded toward positive infinity.";
+            roundingExplanation = "Positive value with non-zero discarded digits; round-up applied.";
         } else {
             roundingExplanation = "Conditions for round-up increment not met; retained digits.";
         }
@@ -131,7 +136,7 @@ export function simulateDivision(dividendInput, dividendFormat, divisorInput, di
             success: true,
             isSpecial: true,
             steps,
-            specialExplanation: "Result overflowed into Infinity.",
+            specialExplanation: "Overflow: Result exceeded maximum exponent.",
             finalDecimal: resultSign === 1 ? "-Infinity" : "Infinity",
             finalBinary: finalEncoded.formattedBinary,
             finalHex: finalEncoded.hexadecimal
