@@ -315,14 +315,6 @@ export function roundCoefficient(
             incrementCoefficient(roundedDigits);
     }
 
-    /*
-     * Example:
-     * 9999999999999999 rounds to
-     * 10000000000000000.
-     *
-     * Decimal64 only keeps 16 digits, so it must
-     * be normalized again.
-     */
     if (roundedDigits.length > maximumDigits) {
         roundedDigits =
             roundedDigits.slice(0, maximumDigits);
@@ -359,7 +351,6 @@ export function divideCoefficients(dividendCoef, divisorCoef, targetPrecision = 
     const divisorStr = divisor.toString();
     
     const scaleFactor = Math.max(0, neededDigits - (dividendStr.length - divisorStr.length));
-    
     dividend = dividend * (10n ** BigInt(scaleFactor));
 
     const quotient = dividend / divisor;
@@ -369,8 +360,10 @@ export function divideCoefficients(dividendCoef, divisorCoef, targetPrecision = 
 
     let retainedCoefficient = quotientStr;
     let discardedDigits = "";
+    let excessDigits = 0;
 
     if (quotientStr.length > targetPrecision) {
+        excessDigits = quotientStr.length - targetPrecision;
         retainedCoefficient = quotientStr.slice(0, targetPrecision);
         discardedDigits = quotientStr.slice(targetPrecision);
     }
@@ -382,6 +375,6 @@ export function divideCoefficients(dividendCoef, divisorCoef, targetPrecision = 
     return {
         quotient: retainedCoefficient,
         discarded: discardedDigits,
-        scaleAdjustment: scaleFactor
+        scaleAdjustment: scaleFactor - excessDigits 
     };
 }

@@ -143,11 +143,24 @@ export function simulateDivision(dividendInput, dividendFormat, divisorInput, di
         };
     }
 
+    let displayQuotient = finalQuotientStr;
+    let displayExponent = currentExponent;
+
+    while (displayQuotient.length > 1 && displayQuotient.endsWith('0')) {
+        displayQuotient = displayQuotient.slice(0, -1);
+        displayExponent += 1;
+    }
+
     const signString = resultSign === 1 ? "-" : "";
-    const finalDecimalStr = `${signString}${finalQuotientStr}e${currentExponent}`;
     
+    const finalDecimalStr = `${signString}${displayQuotient}e${displayExponent}`;
     const finalEncoded = encodeDecimal64(finalDecimalStr);
-    steps.push("Encoded final adjusted coefficient and exponent into Decimal64 bits.");
+    steps.push("Stripped trailing zeros and encoded final coefficient/exponent into Decimal64 bits.");
+
+    let prettyDecimal = `${signString}${displayQuotient}`;
+    if (displayExponent !== 0) {
+        prettyDecimal += ` × 10^${displayExponent}`;
+    }
 
     return {
         success: true,
@@ -157,7 +170,7 @@ export function simulateDivision(dividendInput, dividendFormat, divisorInput, di
         divisorData: divisor,
         grs,
         roundingExplanation,
-        finalDecimal: `${signString}${finalQuotientStr} × 10^${currentExponent}`,
+        finalDecimal: prettyDecimal,
         finalBinary: finalEncoded.formattedBinary,
         finalHex: finalEncoded.hexadecimal
     };
