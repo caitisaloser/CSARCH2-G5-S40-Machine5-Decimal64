@@ -1,0 +1,86 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --page-bg: #eef2f8;
+  --surface: #ffffff;
+  --surface-soft: #f6f8fc;
+  --text-strong: #111a2d;
+  --text-body: #354158;
+  --text-muted: #5d6980;
+  --border-strong: #8d9bb3;
+  --border-soft: #c9d2e1;
+  --primary: #315dc5;
+  --primary-hover: #254ba7;
+  --primary-text: #ffffff;
+  --nav-bg: #101b36;
+  --nav-border: #7785a6;
+  --code-bg-custom: #101b36;
+  --code-text-custom: #c8d8ff;
+  --error-bg: #ffeded;
+  --error-text: #9b2020;
+  --focus-ring: #6f93f0;
+  --shadow-custom: 0 12px 32px rgba(25, 42, 79, .09);
+  --text: var(--text-body);
+  --text-h: var(--text-strong);
+  --bg: var(--page-bg);
+  --border: var(--border-soft);
+  --code-bg: var(--surface-soft);
+  background: var(--page-bg);
+  color: var(--text-body);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page-bg: #0d1424;
+  --surface: #172035;
+  --surface-soft: #202b43;
+  --text-strong: #f4f7ff;
+  --text-body: #d8e0f0;
+  --text-muted: #aeb9cd;
+  --border-strong: #71809c;
+  --border-soft: #46546e;
+  --primary: #7da2ff;
+  --primary-hover: #9ab7ff;
+  --primary-text: #0d1730;
+  --nav-bg: #080e1b;
+  --nav-border: #697895;
+  --code-bg-custom: #080e1b;
+  --code-text-custom: #c8d8ff;
+  --error-bg: #451f27;
+  --error-text: #ffb9c0;
+  --focus-ring: #9ab7ff;
+  --shadow-custom: 0 14px 36px rgba(0, 0, 0, .28);
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: var(--page-bg); color: var(--text-body); transition: background-color .2s ease, color .2s ease; }
+#root { background: var(--page-bg); border-color: var(--border-soft); }
+button, input, select { font: inherit; }
+.module-nav { min-height: 68px; padding: 12px clamp(18px, 4vw, 56px); display: flex; align-items: center; justify-content: space-between; gap: 16px; background: var(--nav-bg); color: #fff; }
+.module-nav > strong { color: #fff; }
+.nav-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.module-nav button { border: 1px solid var(--nav-border); border-radius: 8px; padding: 9px 14px; background: transparent; color: #fff; cursor: pointer; }
+.module-nav button:hover { background: rgba(255, 255, 255, .1); }
+.module-nav button.active { background: #4f7cff; border-color: #82a0ff; color: #fff; }
+.module-nav .theme-toggle { display: inline-flex; align-items: center; gap: 7px; border-color: #a5b2cc; }
+.module-nav button:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+
+/* Shared contrast rules also cover Member 2's existing inline-styled calculator. */
+h1, h2, h3, label, strong, th { color: var(--text-strong); }
+input, select {
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--text-strong);
+  padding: 8px 10px;
+}
+table {
+  border: 2px solid var(--border-strong) !important;
+  background: var(--surface);
+  color: var(--text-body);
+}
+th, td { border: 1px solid var(--border-strong) !important; }
+th { background: var(--surface-soft); }
+td { background: var(--surface); }
+body button:not(.example):not(.theme-toggle) { border-color: var(--border-strong); }
+body > div button { color: inherit; }
+@media (max-width: 560px) { .module-nav { align-items: flex-start; flex-direction: column; } }

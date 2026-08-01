@@ -1,16 +1,44 @@
-# React + Vite
+# Machine 5 — Decimal 64-Bit Floating-Point Machine
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React/Vite web application for studying decimal64 conversion, rounding, and decimal floating-point arithmetic.
 
-Currently, two official plugins are available:
+## Implemented modules
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Decimal-to-decimal64 converter using **IEEE 754 Binary Integer Decimal (BID)** encoding
+- Decimal64 decoder/verifier
+- Positive and negative finite numbers, signed zero, subnormal values, infinity, NaN, overflow, underflow, scientific notation, and input validation
+- Four-method rounding simulator: chopping, round-up, round-down, and round-to-nearest ties-to-even
 
-## React Compiler
+The Decimal64 Converter consistently uses BID, not Densely Packed Decimal (DPD). Technical details and a worked example are in [`docs/decimal64-analysis.md`](docs/decimal64-analysis.md).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run locally
 
-## Expanding the ESLint configuration
+```bash
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Open the local address printed by Vite. Use the top navigation to switch between the Decimal64 Converter and the existing Rounding Simulator.
+
+Use the **Light/Dark** button in the navigation bar to change the color theme. The selected theme is saved in the browser and reused the next time the application opens.
+
+## Test and build
+
+```bash
+npm run test:run
+npm run build
+```
+
+## Decimal64 converter outputs
+
+For each accepted value, the interface shows:
+
+- classification and BID encoding label;
+- sign, combination, exponent-continuation, and coefficient-continuation fields;
+- raw and consistently spaced 64-bit binary output;
+- exactly 16 hexadecimal digits; and
+- the complete parsing, normalization, biasing, and assembly steps.
+
+## Remaining group deliverables
+
+Subtraction, division, final shared documentation, deployment, screenshots, and the YouTube walkthrough are to be ompleted by the assigned members respectively.

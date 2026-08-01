@@ -1,0 +1,32 @@
+.converter-shell { width: min(1060px, calc(100% - 32px)); margin: 0 auto; padding: 42px 0 72px; text-align: left; }
+.converter-header { display: flex; flex-direction: column; gap: 14px; margin-bottom: 30px; }
+.converter-header h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.3rem); letter-spacing: -0.04em; line-height: 1.08; }
+.converter-header h1 { color: var(--text-strong); }
+.converter-header p { margin: 0; color: var(--text-muted); line-height: 1.6; }
+.converter-header .eyebrow { margin: 0; color: var(--primary); font-size: .78rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.converter-card, .output-card { padding: clamp(18px, 3vw, 28px); border: 1px solid var(--border-soft); border-radius: 16px; background: var(--surface); color: var(--text-body); box-shadow: var(--shadow-custom); }
+.converter-card label { display: block; margin-bottom: 8px; font-weight: 700; }
+.input-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; }
+.input-row input { min-width: 0; padding: 12px 14px; border: 1px solid var(--border-strong); border-radius: 9px; background: var(--surface); color: var(--text-strong); }
+.input-row button { padding: 11px 17px; border: 1px solid var(--primary); border-radius: 9px; background: var(--primary); color: var(--primary-text); font-weight: 700; cursor: pointer; }
+.input-row button:hover { background: var(--primary-hover); }
+.input-row button.secondary { background: var(--surface); color: var(--primary); }
+.example-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+.example-row .example { padding: 5px 9px; border: 1px solid var(--border-soft); border-radius: 999px; background: var(--surface-soft); color: var(--text-body); cursor: pointer; }
+.example-row .example:hover { border-color: var(--primary); color: var(--text-strong); }
+.converter-error { margin: 16px 0 0; padding: 12px; border-radius: 8px; background: var(--error-bg); color: var(--error-text); }
+.result-stack { display: grid; gap: 18px; margin-top: 22px; }
+.result-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.result-summary > div, .field-grid > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; padding: 14px; border: 1px solid var(--border-soft); border-radius: 11px; background: var(--surface); }
+.result-summary span, .field-grid span { color: var(--text-muted); font-size: .78rem; font-weight: 700; text-transform: uppercase; }
+.result-summary code { font-size: 1.05rem; font-weight: 800; }
+.output-card h2 { margin: 0 0 14px; color: var(--text-strong); font-size: 1.1rem; font-weight: 750; }
+.field-labels { color: var(--text-muted); font-size: .86rem; }
+.binary-output, .raw-output { display: block; overflow-x: auto; padding: 13px; border-radius: 8px; background: var(--code-bg-custom); color: var(--code-text-custom); font-size: clamp(.76rem, 2vw, 1rem); white-space: nowrap; }
+.output-card details { margin-top: 12px; }
+.output-card summary { margin-bottom: 8px; cursor: pointer; }
+.field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.field-grid code { overflow-wrap: anywhere; }
+.steps { margin: 0; padding-left: 22px; }
+.steps li { margin: 8px 0; line-height: 1.5; }
+@media (max-width: 680px) { .input-row { grid-template-columns: 1fr 1fr; } .input-row input { grid-column: 1 / -1; } .result-summary, .field-grid { grid-template-columns: 1fr; } }
