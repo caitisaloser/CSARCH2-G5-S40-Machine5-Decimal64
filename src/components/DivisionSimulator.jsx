@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { simulateDivision } from '../arithmetic/divisionGRS.js';
 import "../styles/arithmetic.css";
 

@@ -70,7 +70,7 @@ export function simulateDivision(dividendInput, dividendFormat, divisorInput, di
     steps.push(`GRS Evaluated -> Guard: ${grs.guard}, Round: ${grs.round}, Sticky: ${grs.sticky}`);
 
     let increment = false;
-    let roundingExplanation = "";
+    let roundingExplanation;
     const isNonZeroDiscard = grs.guard !== "0" || grs.round !== "0" || grs.sticky !== "0";
 
     if (roundingMode === "chopping") {

@@ -40,7 +40,7 @@ function SubtractionSimulator() {
         setOutput(null);
     }
 
-    function useExample(first, second) {
+    function loadExample(first, second) {
         setOperandA(first);
         setOperandB(second);
         setFormatA("decimal");
@@ -215,7 +215,7 @@ function SubtractionSimulator() {
                         type="button"
                         className="example"
                         onClick={() =>
-                            useExample("12.5", "3.2")
+                            loadExample("12.5", "3.2")
                         }
                     >
                         12.5 − 3.2
@@ -225,7 +225,7 @@ function SubtractionSimulator() {
                         type="button"
                         className="example"
                         onClick={() =>
-                            useExample("12.5", "-3.2")
+                            loadExample("12.5", "-3.2")
                         }
                     >
                         12.5 − (−3.2)
@@ -235,7 +235,7 @@ function SubtractionSimulator() {
                         type="button"
                         className="example"
                         onClick={() =>
-                            useExample("-12.5", "3.2")
+                            loadExample("-12.5", "3.2")
                         }
                     >
                         −12.5 − 3.2
@@ -245,7 +245,7 @@ function SubtractionSimulator() {
                         type="button"
                         className="example"
                         onClick={() =>
-                            useExample("5.5", "5.5")
+                            loadExample("5.5", "5.5")
                         }
                     >
                         5.5 − 5.5
@@ -255,7 +255,7 @@ function SubtractionSimulator() {
                         type="button"
                         className="example"
                         onClick={() =>
-                            useExample(
+                            loadExample(
                                 "1234567890123456",
                                 "0.0000000000000001"
                             )

@@ -16,7 +16,7 @@ export function roundNearestEven(info) {
     let integerPart = info.integerPart;
     let retained = info.retained;
 
-    let decision = "";
+    let decision;
     let shouldIncrement = false;
 
     const guard = info.guard;

@@ -239,7 +239,7 @@ export function roundCoefficient(
         /[1-9]/.test(discarded);
 
     let shouldIncrement = false;
-    let decision = "";
+    let decision;
 
     if (roundingMode === "chopping") {
         decision =
