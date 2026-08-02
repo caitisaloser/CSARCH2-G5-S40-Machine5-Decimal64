@@ -49,8 +49,7 @@ function SubtractionSimulator() {
         <main className="arithmetic-shell">
             <header className="arithmetic-header">
                 <p className="eyebrow">
-                    Member 3 Module
-                </p>
+                    Machine5 - Substration using GRS                </p>
 
                 <h1>
                     Decimal64 Subtraction Using GRS
