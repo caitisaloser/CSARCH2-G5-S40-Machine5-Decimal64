@@ -30,3 +30,6 @@
 .steps { margin: 0; padding-left: 22px; }
 .steps li { margin: 8px 0; line-height: 1.5; }
 @media (max-width: 680px) { .input-row { grid-template-columns: 1fr 1fr; } .input-row input { grid-column: 1 / -1; } .result-summary, .field-grid { grid-template-columns: 1fr; } }
+.copy-button { margin-top: .6rem; padding: .55rem .9rem; border: 1px solid var(--border-soft); border-radius: 8px; background: var(--surface-soft); color: var(--text-body); font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; transition: background .2s ease, border-color .2s ease, transform .1s ease; }
+.copy-button:hover { background: var(--surface); border-color: var(--primary); color: var(--text-strong); }
+.copy-button:active { transform: scale(.98); }
