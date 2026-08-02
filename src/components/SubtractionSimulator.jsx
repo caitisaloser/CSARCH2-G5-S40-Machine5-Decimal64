@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { subtractDecimal64 } from "../arithmetic/subtractionGRS.js";
+import ResultDisplay from "./ResultDisplay";
+import StepDisplay from "./StepDisplay";
+import ErrorMessage from "./ErrorMessage";
 import "../styles/arithmetic.css";
 
 function SubtractionSimulator() {
@@ -263,12 +266,7 @@ function SubtractionSimulator() {
                 </div>
 
                 {output && !output.success && (
-                    <div
-                        className="arithmetic-error"
-                        role="alert"
-                    >
-                        {output.error}
-                    </div>
+                    <ErrorMessage message={output.error} />
                 )}
             </section>
 
@@ -294,7 +292,7 @@ function SubtractionSimulator() {
                         <GRSDisplay grs={output.grs} />
                     )}
 
-                    <FinalResult result={output.result} />
+                    <ResultDisplay result={output.result} />
 
                     <StepDisplay steps={output.steps} />
                 </section>
@@ -436,65 +434,6 @@ function GRSDisplay({ grs }) {
                     </p>
                 </div>
             )}
-        </article>
-    );
-}
-
-function FinalResult({ result }) {
-    return (
-        <article className="output-card">
-            <h2>Final Result</h2>
-
-            <div className="result-summary">
-                <div>
-                    <span>Decimal</span>
-                    <code>{result.decimal}</code>
-                </div>
-
-                <div>
-                    <span>Classification</span>
-                    <code>{result.kind}</code>
-                </div>
-
-                <div>
-                    <span>Hexadecimal</span>
-                    <code>{result.hexadecimal}</code>
-                </div>
-            </div>
-
-            <div className="binary-result">
-                <span>Binary with proper spacing</span>
-
-                <code className="binary-output">
-                    {result.formattedBinary}
-                </code>
-            </div>
-
-            <details>
-                <summary>
-                    Show raw 64-bit binary
-                </summary>
-
-                <code className="raw-output">
-                    {result.rawBinary}
-                </code>
-            </details>
-        </article>
-    );
-}
-
-function StepDisplay({ steps }) {
-    return (
-        <article className="output-card">
-            <h2>Step-by-Step Solution</h2>
-
-            <ol className="steps">
-                {steps.map((step, index) => (
-                    <li key={`${index}-${step}`}>
-                        {step}
-                    </li>
-                ))}
-            </ol>
         </article>
     );
 }

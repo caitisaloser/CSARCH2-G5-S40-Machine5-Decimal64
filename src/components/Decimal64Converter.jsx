@@ -2,6 +2,7 @@ import { useState } from "react";
 import { encodeDecimal64 } from "../decimal64/decimal64Encoder";
 import { FIELD_LABELS } from "../decimal64/binaryFormatter";
 import "../styles/converter.css";
+import StepDisplay from "./StepDisplay";
 
 const EXAMPLES = ["123.45", "-98.765", "-0", "1.2345e10", "9.999e-20", "Infinity", "-Infinity", "NaN"];
 
@@ -76,10 +77,10 @@ export default function Decimal64Converter() {
             </div>
           </article>
 
-          <article className="output-card">
-            <h2>Step-by-step conversion</h2>
-            <ol className="steps">{result.steps.map((step, index) => <li key={`${index}-${step}`}>{step}</li>)}</ol>
-          </article>
+          <StepDisplay
+            steps={result.steps}
+            title="Step-by-step conversion"
+          />
         </section>
       )}
     </main>

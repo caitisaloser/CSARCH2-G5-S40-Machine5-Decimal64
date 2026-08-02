@@ -4,6 +4,7 @@ import RoundingSimulator from "./components/RoundingSimulator";
 import SubtractionSimulator from "./components/SubtractionSimulator";
 import DivisionSimulator from "./components/DivisionSimulator";
 import "./styles/global.css";
+import Navigation from "./components/Navigation";
 
 function App() {
 
@@ -43,96 +44,12 @@ function App() {
 
     return (
         <>
-            <nav
-                className="module-nav"
-                aria-label="Machine modules"
-            >
-                <strong>Decimal64 Machine</strong>
-
-                <div className="nav-actions">
-
-                    <button
-                        className={
-                            module === "converter"
-                                ? "active"
-                                : ""
-                        }
-                        onClick={() =>
-                            setModule("converter")
-                        }
-                    >
-                        Converter
-                    </button>
-
-                    <button
-                        className={
-                            module === "rounding"
-                                ? "active"
-                                : ""
-                        }
-                        onClick={() =>
-                            setModule("rounding")
-                        }
-                    >
-                        Rounding
-                    </button>
-
-                    <button
-                        className={
-                            module === "subtraction"
-                                ? "active"
-                                : ""
-                        }
-                        onClick={() =>
-                            setModule("subtraction")
-                        }
-                    >
-                        Subtraction
-                    </button>
-
-                    <button
-                        className={
-                            module === "division"
-                                ? "active"
-                                : ""
-                        }
-                        onClick={() =>
-                            setModule("division")
-                        }
-                    >
-                        Division
-                    </button>
-
-                    <button
-                        className="theme-toggle"
-                        type="button"
-                        aria-label={`Switch to ${
-                            theme === "light"
-                                ? "dark"
-                                : "light"
-                        } mode`}
-                        aria-pressed={theme === "dark"}
-                        onClick={() =>
-                            setTheme((currentTheme) =>
-                                currentTheme === "light"
-                                    ? "dark"
-                                    : "light"
-                            )
-                        }
-                    >
-                        <span aria-hidden="true">
-                            {theme === "light"
-                                ? "☾"
-                                : "☀"}
-                        </span>
-
-                        {theme === "light"
-                            ? "Dark"
-                            : "Light"}
-                    </button>
-
-                </div>
-            </nav>
+            <Navigation
+                activeModule={module}
+                setActiveModule={setModule}
+                theme={theme}
+                setTheme={setTheme}
+            />
 
             {module === "converter" && (
                 <Decimal64Converter />
