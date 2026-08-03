@@ -183,99 +183,178 @@ Automated testing is performed using **Vitest**, while interface behavior is als
 
 # GRS Subtraction Test Cases
 
-## Test Case TC-SUB-01
+### Test Case SUB-01
 
-**Test Case ID:** TC-SUB-01  
-**Module:** GRS Subtraction Simulator  
-**Purpose:** Verify subtraction using two decimal operands.  
-**Input:** Two valid finite decimal operands  
-**Input Format:** Decimal / Decimal  
-**Rounding Mode:** Round-to-Nearest, Ties-to-Even  
-**Expected Output:** Correct subtraction result with decimal, binary, hexadecimal, GRS, and step-by-step information.  
-**Actual Output:** Subtraction completed and final Decimal64 result displayed successfully.  
-**Status:** PASS  
-**Screenshot File:** `subtraction-decimal.png`  
-**Remarks:** Normal subtraction workflow.
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Positive minus positive |
+| Operand A | `12.5` |
+| Format A | Decimal |
+| Operand B | `3.2` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Decimal | `9.3` |
+| Expected Hexadecimal | `31A000000000005D` |
+| Status | Pass |
 
----
+### Test Case SUB-02
 
-## Test Case TC-SUB-02
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Positive minus negative |
+| Operand A | `12.5` |
+| Format A | Decimal |
+| Operand B | `-3.2` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Decimal | `15.7` |
+| Status | Pass |
 
-**Test Case ID:** TC-SUB-02  
-**Module:** GRS Subtraction Simulator  
-**Purpose:** Verify subtraction using hexadecimal Decimal64 operands.  
-**Input:** Two valid 16-digit Decimal64 hexadecimal values  
-**Input Format:** Hexadecimal / Hexadecimal  
-**Rounding Mode:** Round-to-Nearest, Ties-to-Even  
-**Expected Output:** Both hexadecimal operands are decoded before subtraction and a valid final Decimal64 result is displayed.  
-**Actual Output:** Hexadecimal operands processed successfully.  
-**Status:** PASS  
-**Screenshot File:** `subtraction-hexadecimal.png`  
-**Remarks:** Confirms Decimal64 decoder integration.
+### Test Case SUB-03
 
----
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Negative minus positive |
+| Operand A | `-12.5` |
+| Format A | Decimal |
+| Operand B | `3.2` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Decimal | `-15.7` |
+| Status | Pass |
 
-## Test Case TC-SUB-03
+### Test Case SUB-04
 
-**Test Case ID:** TC-SUB-03  
-**Module:** GRS Subtraction Simulator  
-**Purpose:** Verify mixed-format subtraction.  
-**Input:** One decimal operand and one hexadecimal Decimal64 operand  
-**Input Format:** Decimal / Hexadecimal  
-**Rounding Mode:** Round-to-Nearest, Ties-to-Even  
-**Expected Output:** Both operand formats are accepted and processed within the same calculation.  
-**Actual Output:** Mixed-format subtraction completed successfully.  
-**Status:** PASS  
-**Screenshot File:** `subtraction-mixed-format.png`  
-**Remarks:** Required integration test for mixed operand formats.
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Negative minus negative |
+| Operand A | `-12.5` |
+| Format A | Decimal |
+| Operand B | `-3.2` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Decimal | `-9.3` |
+| Status | Pass |
 
----
+### Test Case SUB-05
 
-## Test Case TC-SUB-04
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Equal operands and exact cancellation |
+| Operand A | `5.5` |
+| Format A | Decimal |
+| Operand B | `5.5` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Decimal | `0` |
+| Status | Pass |
 
-**Test Case ID:** TC-SUB-04  
-**Module:** GRS Subtraction Simulator  
-**Purpose:** Verify exact cancellation.  
-**Input:** `5.25 - 5.25`  
-**Input Format:** Decimal / Decimal  
-**Rounding Mode:** Round-to-Nearest, Ties-to-Even  
-**Expected Output:** Zero.  
-**Actual Output:** Exact cancellation handled successfully and zero returned.  
-**Status:** PASS  
-**Screenshot File:** `subtraction-exact-cancellation.png`  
-**Remarks:** Special subtraction case.
+### Test Case SUB-06
 
----
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Different exponents |
+| Operand A | `1000` |
+| Format A | Decimal |
+| Operand B | `0.001` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Decimal | `999.999` |
+| Status | Pass |
 
-## Test Case TC-SUB-05
+### Test Case SUB-07
 
-**Test Case ID:** TC-SUB-05  
-**Module:** GRS Subtraction Simulator  
-**Purpose:** Verify exponent alignment when operands use different exponents.  
-**Input:** `12.5 - 0.25`  
-**Input Format:** Decimal / Decimal  
-**Rounding Mode:** Round-to-Nearest, Ties-to-Even  
-**Expected Output:** Operands are aligned before coefficient subtraction and alignment information appears in the calculation steps.  
-**Actual Output:** Exponent alignment and subtraction completed successfully.  
-**Status:** PASS  
-**Screenshot File:** `subtraction-exponent-alignment.png`  
-**Remarks:** Verifies GRS-related alignment workflow.
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Nonzero Guard, Round, and Sticky digits |
+| Operand A | `1234567890123456` |
+| Format A | Decimal |
+| Operand B | `0.0000000000000001` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Guard | `9` |
+| Expected Round | `9` |
+| Expected Sticky | `1` |
+| Expected Decimal | `1234567890123456` |
+| Expected Hexadecimal | `31C462D53C8ABAC0` |
+| Status | Pass |
 
----
+### Test Case SUB-08
 
-## Test Case TC-SUB-06
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Cancellation requiring normalization |
+| Operand A | `1.0001` |
+| Format A | Decimal |
+| Operand B | `1.0000` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Decimal | `0.0001` |
+| Status | Pass |
 
-**Test Case ID:** TC-SUB-06  
-**Module:** GRS Subtraction Simulator  
-**Purpose:** Verify controlled handling of invalid subtraction input.  
-**Input:** `abc` and `3.2`  
-**Input Format:** Decimal / Decimal  
-**Rounding Mode:** Round-to-Nearest, Ties-to-Even  
-**Expected Output:** Operation is rejected with an error message.  
-**Actual Output:** Controlled error returned without application crash.  
-**Status:** PASS  
-**Screenshot File:** `subtraction-invalid-input.png`  
-**Remarks:** Also covered by cross-module integration testing.
+### Test Case SUB-09
+
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Both operands in hexadecimal |
+| Operand A | `31A000000000007D` (Decimal64 hexadecimal for `12.5`) |
+| Format A | IEEE Decimal64 Hexadecimal |
+| Operand B | `31A0000000000020` (Decimal64 hexadecimal for `3.2`) |
+| Format B | IEEE Decimal64 Hexadecimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Decimal | `9.3` |
+| Status | Pass |
+
+### Test Case SUB-10
+
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Infinity minus Infinity |
+| Operand A | `Infinity` |
+| Format A | Decimal |
+| Operand B | `Infinity` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Result | `NaN` |
+| Status | Pass |
+
+### Test Case SUB-11
+
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | NaN input |
+| Operand A | `NaN` |
+| Format A | Decimal |
+| Operand B | `5` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Result | `NaN` |
+| Status | Pass |
+
+### Test Case SUB-12
+
+| Field | Value |
+|---|---|
+| Module | GRS Subtraction |
+| Purpose | Positive and negative zero |
+| Operand A | `0` |
+| Format A | Decimal |
+| Operand B | `-0` |
+| Format B | Decimal |
+| Rounding Mode | Round-to-Nearest, Ties-to-Even |
+| Expected Decimal | `0` |
+| Status | Pass |
 
 ---
 
